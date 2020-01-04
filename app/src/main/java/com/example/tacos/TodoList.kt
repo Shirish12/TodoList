@@ -8,13 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 
+// This whole class is RecyclerView Adapter Class
+//Ref: https://www.youtube.com/watch?v=hyyX3g57Ms8&t=720s
+
 class TodoList(val list_items: MutableList<String>) : RecyclerView.Adapter<TodoList.MainViewHolder>(){
 
+    // Initializing the variables
     private var removedPosition: Int = 0
     private var removedItem: String = ""
 
     var ClickItem: ((String) -> Unit)? = null
 
+    // Implementing default holders for RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
 
 
@@ -29,7 +34,9 @@ class TodoList(val list_items: MutableList<String>) : RecyclerView.Adapter<TodoL
         holder.eachItem.text = list_items[position]
 
     }
-
+    // This function Removes the items from the Recyclerview list and if the user swiped
+    // it by mistake then the user can undo their action
+    //Ref: https://www.youtube.com/watch?v=eEonjkmox-0&t=1626s
     fun removeItem(view: RecyclerView.ViewHolder){
         removedPosition = view.adapterPosition
         removedItem = list_items[view.adapterPosition]
@@ -44,11 +51,13 @@ class TodoList(val list_items: MutableList<String>) : RecyclerView.Adapter<TodoL
         }.show()
     }
 
+    // Inserting the items in recyclerview list
     fun insertTodoItems(item: String){
         list_items.add(item)
         notifyDataSetChanged()
     }
 
+    // This inner class handles onclick event on the recyclerview item
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
         init{
