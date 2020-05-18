@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         // Adds the item in the Todo List and also displays it in the recyclerview
         add.setOnClickListener {
 
-            var fileContents = editText.text.toString() + "\n"
+            val fileContents = editText.text.toString() + "\n"
 
             // This writes the content from textview in to the file
             openFileOutput(filename, Context.MODE_APPEND).use{
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Removes the item from recyclerview if swiped right or left
                 RecyclerViewAdapter.removeItem(viewHolder)
-                var items = RecyclerViewAdapter.list_items
+                val items = RecyclerViewAdapter.list_items
 
                 deleteItem(items)
             }
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
     fun deleteItem(items: MutableList<String>) {
         openFileOutput(filename, Context.MODE_PRIVATE).use {
             for (item in items) {
-                var item = item + "\n"
+                val item = item + "\n"
                 it.write(item.toByteArray())
             }
 
